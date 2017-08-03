@@ -7,7 +7,7 @@ API_ENDOPINT = 'http://api.fixer.io/latest'
 """ File with available currency codes and their symbols """
 CURENCY_SYMBOLS_FILE = 'currencies_symbols.json'
 
-""" Error messages """ 
+""" Error messages """
 FILE_IO_ERROR = 'Cant open and read file: {0}'
 JSON_ERROR = 'Cant transfer content from file {0} to JSON format'
 CCODE_ERROR = 'Error, unknown currency code or symbol: {0}'
