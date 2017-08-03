@@ -6,6 +6,7 @@
 
 import argparse 
 import sys
+import constants as cons
 from converter import currency_converter
 from flask import Flask, request
 
@@ -26,7 +27,7 @@ def converter():
 	amount = request.args.get('amount')
 	
 	if not amount or not input_currency:
-		return "Please enter input currency code or symbol, and amount you wish to transfer."
+		return currency_converter._generate_error_msg(cons.MISSING_PARAM)
 
 	amount_error = False
 	try:
@@ -38,7 +39,7 @@ def converter():
 			amount_error = True
 
 	if amount_error:
-		return "Error, amount must be number bigger than 0"
+		return currency_converter._generate_error_msg(cons.AMOUNT_ERROR)
 	else:
 		result = currency_converter.convert(input_currency, output_currency, amount)
 		return result
@@ -58,7 +59,7 @@ if __name__ == "__main__":
 	arguments = parser.parse_args()
 
 	if arguments.amount <= 0:
-		print("Error, amount must be number bigger than 0")
+		print(currency_converter._generate_error_msg(cons.AMOUNT_ERROR))
 		sys.exit(1)
 
 	result = currency_converter.convert(arguments.input_currency, arguments.output_currency, arguments.amount)
